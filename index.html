@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>The Machine - Scoring Assistant</title>
+    <link rel="stylesheet" href="static/style.css">
+    <link rel="icon" href="static/favicon.svg">
+  </head>
+  <body>
+    <h1>The Machine <img src="static/favicon.svg" alt="-" class="simbolo"> Scoring Assistant</h1>
+    <div class="risorse">
+        <h3>RISORSE</h3>
+        <datalist id="markers">
+          <option value="0"></option>
+          <option value="25"></option>
+          <option value="50"></option>
+          <option value="75"></option>
+          <option value="100"></option>
+          <option value="125"></option>
+          <option value="150"></option>
+        </datalist>
+        <div class="risorsa">
+          <img src="static/P.svg" alt="P" class="simbolo">
+          <label id="piante-label" class="number-label">0</label>
+          <input type="range" id="piante" name="piante" min="0" max="150" value="0" step="1" list="markers">
+          <label>Piante</label>
+        </div>
+        <div class="risorsa">
+          <img src="static/A.svg" alt="A" class="simbolo">
+          <label id="animali-label" class="number-label">0</label>
+          <input type="range" id="animali" name="animali" min="0" max="150" value="0" step="1" list="markers">
+          <label>Animali</label>
+        </div>
+        <div class="risorsa">
+          <img src="static/M.svg" alt="M" class="simbolo">
+          <label id="minerali-label" class="number-label">0</label>
+          <input type="range" id="minerali" name="minerali" min="0" max="150" value="0" step="1" list="markers">
+          <label>Minerali</label>
+        </div>
+        <div class="risorsa">
+          <img src="static/I.svg" alt="I" class="simbolo">
+          <label id="inquinamento-label" class="number-label">0</label>
+          <input type="range" id="inquinamento" name="inquinamento" min="0" max="150" value="0" step="1" list="markers">
+          <label>Inquinamento</label>
+        </div>
+        <div class="risorsa">
+          <img src="static/E.svg" alt="E" class="simbolo">
+          <label id="energia-label" class="number-label">0</label>
+          <input type="range" id="energia" name="energia" min="0" max="150" value="0" step="1" list="markers">
+          <label>Energia</label>
+        </div>
+        <div class="risorsa">
+          <img src="static/C.svg" alt="C" class="simbolo">
+          <label id="concetti-label" class="number-label">0</label>
+          <input type="range" id="concetti" name="concetti" min="0" max="150" value="0" step="1" list="markers">
+          <label>Concetti</label>
+        </div>
+    </div>
+    <div>
+      <h3>RUOLI</h3>
+      <table width="100%">
+        <tr>
+          <td width="50%">
+              <div class="ruoli">
+              <img src="static/Ecologista.svg" alt="" class="ritratto">
+              <label class="role-label">Ecologista</label>
+              <label id="ecologista">0 punti</label>
+              </div>
+          </td>
+          <td width="50%">
+              <div class="ruoli">
+              <img src="static/Animalista.svg" alt="" class="ritratto">
+              <label class="role-label">Animalista</label>
+              <label id="animalista">0 punti</label>
+              </div>
+          </td>
+        </tr>
+        <tr>
+          <td width="50%">
+              <div class="ruoli">
+              <img src="static/Geologo.svg" alt="" class="ritratto">
+              <label class="role-label">Geologo</label>
+              <label id="geologo">0 punti</label>
+              </div>
+          </td>
+          <td width="50%">
+              <div class="ruoli">
+              <img src="static/Intellettuale.svg" alt="" class="ritratto">
+              <label class="role-label">Intellettuale</label>
+              <label id="intellettuale">0 punti</label>
+              </div>
+          </td>
+        </tr>
+        <tr>
+          <td width="50%">
+              <div class="ruoli">
+              <img src="static/Materialista.svg" alt="" class="ritratto">
+              <label class="role-label">Materialista</label>
+              <label id="materialista">0 punti</label>
+              </div>
+          </td>
+          <td width="50%">
+              <div class="ruoli">
+              <img src="static/Collezionista.svg" alt="" class="ritratto">
+              <label class="role-label">Collezionista</label>
+              <label id="collezionista">0 punti</label>
+              </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </body>
+  <script>
+    function updateRoles() {
+      P = parseInt(document.getElementById("piante").value);
+      A = parseInt(document.getElementById("animali").value);
+      M = parseInt(document.getElementById("minerali").value);
+      I = parseInt(document.getElementById("inquinamento").value);
+      E = parseInt(document.getElementById("energia").value);
+      C = parseInt(document.getElementById("concetti").value);
+      f = Math.floor;
+      m = Math.min;
+      document.getElementById("ecologista"   ).innerHTML = (P + f(A/2) - f(I/2)) + " punti";
+      document.getElementById("animalista"   ).innerHTML = (A + f(M/2) - f(I/3)) + " punti";
+      document.getElementById("geologo"      ).innerHTML = (M + f(P/2) - f(I/3)) + " punti";
+      document.getElementById("intellettuale").innerHTML = (C + f(m(P,A)/2) - f(I/2)) + " punti";
+      document.getElementById("materialista" ).innerHTML = (E + f(m(M,C)/2)) + " punti";
+      document.getElementById("collezionista" ).innerHTML = (f(P/3)+f(A/3)+f(M/3)+f(I/3)+f(E/3)+f(C/3)+m(C,M,A,P)-f(I/2)) + " punti";
+    }
+    function makeListener(id) {
+      function listener() {
+        document.getElementById(id + "-label").innerHTML = this.value;
+        updateRoles();
+      }
+      document.getElementById(id).addEventListener('input', listener);
+    }
+    makeListener("piante");
+    makeListener("animali");
+    makeListener("minerali");
+    makeListener("inquinamento");
+    makeListener("energia");
+    makeListener("concetti");
+  </script>
+</html>

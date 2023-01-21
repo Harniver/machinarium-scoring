@@ -1,0 +1,44 @@
+body {
+  background-color: white;
+}
+
+input {
+    width: 80%;
+}
+
+label {
+    font-size: x-large;
+    padding-left: 5pt;
+}
+
+.number-label {
+    width: 5%;
+}
+
+.role-label {
+    width: 50%;
+}
+
+.simbolo {
+}
+
+.ritratto {
+    width: 20%;
+}
+
+.ruoli {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5pt;
+}
+
+.risorsa {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5pt;
+}
+
+.risorse {
+    background-color: #f0f0f0;
+    padding: 10pt;
+}
