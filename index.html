@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>The Machine - Scoring Assistant</title>
+    <title>Machinarium - Scoring Assistant</title>
     <link rel="stylesheet" href="static/style.css">
     <link rel="icon" href="static/favicon.svg">
   </head>
   <body>
-    <h1>The Machine <img src="static/favicon.svg" alt="-" class="simbolo"> Scoring Assistant</h1>
+    <h1>Machinarium <img src="static/favicon.svg" alt="-" class="simbolo"> Scoring Assistant</h1>
     <div class="risorse">
         <h3>RISORSE</h3>
         <datalist id="markers">
@@ -124,7 +124,7 @@
       document.getElementById("geologo"      ).innerHTML = (M + f(P/2) - f(I/3)) + " punti";
       document.getElementById("intellettuale").innerHTML = (C + f(m(P,A)/2) - f(I/2)) + " punti";
       document.getElementById("materialista" ).innerHTML = (E + f(m(M,C)/2)) + " punti";
-      document.getElementById("collezionista" ).innerHTML = (f((P+A+M+I+E+C)/3)+m(C,M,A,P,E)-f(I/2)) + " punti";
+      document.getElementById("collezionista" ).innerHTML = (f(P/4)+f(A/4)+f(M/4)+f(C/4)+f(E/4)+m(C,M,A,P,E)) + " punti";
     }
     function makeListener(id) {
       function listener() {
